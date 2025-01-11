@@ -40,8 +40,7 @@ const MobileMenuButton = ({ isOpen, onClick, hasBlueNav }) => (
   </button>
 );
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const Navbar = ({ isOpen, setIsOpen }) => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
@@ -90,14 +89,14 @@ const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         hasBlueNav
           ? scrolled 
-            ? 'bg-transparent backdrop-blur-sm shadow-lg' 
+            ? 'bg-white dark:bg-secondary-900 shadow-lg' 
             : 'bg-transparent'
           : scrolled
             ? 'bg-white/80 shadow-lg dark:bg-secondary-900/80'
             : 'bg-transparent'
       }`}
     >
-      <div className={`absolute inset-0 backdrop-blur-sm ${hasBlueNav ? 'bg-transparent' : ''}`} />
+      <div className={`absolute inset-0 backdrop-blur-sm ${hasBlueNav && !scrolled ? 'bg-transparent' : ''}`} />
       <nav className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo/Company Name */}
@@ -167,37 +166,21 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <motion.div
-          initial={false}
-          animate={isOpen ? { 
-            height: 'auto', 
-            opacity: 1,
-            y: 0
-          } : { 
-            height: 0, 
-            opacity: 0,
-            y: -10
-          }}
-          transition={{ duration: 0.2 }}
-          className={`lg:hidden overflow-hidden fixed left-0 right-0 top-[64px] md:top-[80px] ${
-            hasBlueNav ? 'bg-transparent backdrop-blur-md' : 'bg-white/95'
-          } shadow-lg border-t ${
-            hasBlueNav ? 'border-transparent' : 'border-secondary-100'
-          }`}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: isOpen ? 1 : 0, y: isOpen ? 0 : -20 }}
+          transition={{ duration: 0.3 }}
+          className={`fixed inset-x-0 top-[72px] p-4 z-50 bg-blue-400 dark:bg-secondary-800 shadow-lg ${isOpen ? 'block' : 'hidden'}`}
         >
-          <div className="container mx-auto px-4 py-4 space-y-2">
+          <div className="container mx-auto px-4 py-4 space-y-3">
             {NAVIGATION_LINKS.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                className={`block px-4 py-3.5 rounded-lg text-sm font-medium transition-all duration-300 ${
                   location.pathname === link.path
-                    ? hasBlueNav
-                      ? 'bg-blue-100 text-blue-600 dark:bg-primary-500/10 dark:text-primary-400'
-                      : 'bg-accent-500/10 text-accent-600 dark:text-accent-400'
-                    : hasBlueNav
-                      ? 'text-blue-600 hover:text-blue-900 hover:bg-blue-100/50'
-                      : 'text-secondary-600 hover:text-secondary-900 hover:bg-secondary-100/50'
+                    ? 'bg-blue-500 text-white shadow-inner'
+                    : 'text-white hover:bg-blue-500'
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -231,9 +214,8 @@ const Navbar = () => {
                 </div>
               </Link>
             ))}
-            <div className="px-4 py-3 border-t border-secondary-100">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-secondary-600 " >Theme</span>
+            <div className="px-4 py-3 mt-2 border-t border-blue-300">
+              <div className="flex items-center justify-end">
                 <ThemeToggle />
               </div>
             </div>
@@ -246,12 +228,13 @@ const Navbar = () => {
 
 function App() {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-secondary-50 dark:bg-secondary-900 transition-colors duration-300">
-      <Navbar />
+      <Navbar isOpen={isOpen} setIsOpen={setIsOpen} />
       {location.pathname !== '/' && <BackButton />}
-      <main>
+      <main className={`${isOpen ? 'blur-sm' : ''} transition-all duration-300`}>
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -262,7 +245,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </main>
-      <Footer />
+      <Footer className={`${isOpen ? 'blur-sm' : ''} transition-all duration-300`} />
     </div>
   );
 }

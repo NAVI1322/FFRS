@@ -7,10 +7,18 @@ import AnimatedServiceIcon from '../components/AnimatedServiceIcon';
 
 // Image paths
 const heroImages = [
-  '/images/hero/main-hero.jpg',
-  '/images/hero/hero-2.jpg',
-  '/images/hero/hero-3.jpg',
-  '/images/hero/hero-4.jpg'
+  {
+    src: '/images/hero/main-hero.jpg',
+    position: '80% center'
+  },
+  {
+    src: '/images/hero/hero-2.jpg',
+    position: '80% center'
+  },
+  {
+    src: '/images/hero/hero-3.jpg',
+    position: '80% center'
+  }
 ];
 const aboutImage = '/images/hero/about-hero.jpg';
 const trustImage = '/images/hero/trust-hero.jpg';
@@ -153,20 +161,17 @@ const Home = () => {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImageIndex}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
             className="absolute inset-0"
           >
-            <motion.div 
+            <div 
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 6, ease: "easeOut" }}
               style={{ 
-                backgroundImage: `url(${heroImages[currentImageIndex]})`,
-                backgroundPosition: 'center left'
+                backgroundImage: `url(${heroImages[currentImageIndex].src})`,
+                backgroundPosition: heroImages[currentImageIndex].position
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-l from-secondary-900/95 via-secondary-900/80 to-secondary-900/20" />
@@ -176,7 +181,8 @@ const Home = () => {
         {/* Navigation Arrows */}
         <button 
           onClick={prevImage}
-          className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white transition-all duration-300 hover:scale-110 hidden lg:block"
+          className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white transition-all duration-300 hover:scale-110 hidden md:block"
+          aria-label="Previous image"
         >
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -184,7 +190,8 @@ const Home = () => {
         </button>
         <button 
           onClick={nextImage}
-          className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white transition-all duration-300 hover:scale-110 hidden lg:block"
+          className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white transition-all duration-300 hover:scale-110 hidden md:block"
+          aria-label="Next image"
         >
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -289,30 +296,6 @@ const Home = () => {
               </motion.div>
             </div>
           </motion.div>
-
-          {/* Image indicators */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-3">
-            {heroImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentImageIndex(index)}
-                className="group relative h-2 rounded-full overflow-hidden transition-all duration-500 hover:scale-110"
-                style={{
-                  width: currentImageIndex === index ? '3rem' : '0.5rem',
-                  backgroundColor: currentImageIndex === index ? 'rgb(var(--accent-400))' : 'rgba(255, 255, 255, 0.3)'
-                }}
-              >
-                {currentImageIndex === index && (
-                  <motion.div 
-                    className="absolute inset-0 bg-accent-400"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 5, ease: "linear" }}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
         </div>
       </section>
 
