@@ -63,8 +63,8 @@ const Contact = () => {
             >
               <div className="text-accent-500 text-3xl mb-4">✉️</div>
               <h3 className="text-xl font-semibold text-secondary-900 dark:text-white mb-2">Email</h3>
-              <a href="mailto:rksharma041976@gmail.com" className="text-secondary-600 dark:text-secondary-400 hover:text-accent-500 transition-colors">
-                varinder@gmail.com
+              <a href="mailto:fastfreezeinfo@gmail.com" className="text-secondary-600 dark:text-secondary-400 hover:text-accent-500 transition-colors">
+              fastfreezeinfo@gmail.com
               </a>
             </motion.div>
 

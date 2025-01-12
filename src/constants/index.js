@@ -2,7 +2,7 @@ export const COMPANY_NAME = "Fast Freeze Heating & Refrigeration Services";
 
 export const CONTACT_INFO = {
   phones: ["+1 (437) 986-6955" ,"+1 (647) 894-2308" ],
-  email: "varinder@gmail.com",
+  email: "fastfreezeinfo@gmail.com",
 };
 
 export const SERVICES = [
