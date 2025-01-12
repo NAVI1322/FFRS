@@ -1,48 +1,25 @@
 {
-  "version": 2,
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/"
-    },
-    {
-      "src": "/services",
-      "dest": "/"
-    },
-    {
-      "src": "/about",
-      "dest": "/"
-    },
-    {
-      "src": "/testimonials",
-      "dest": "/"
-    },
-    {
-      "src": "/contact",
-      "dest": "/"
-    },
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/favicon.ico",
-      "dest": "/favicon.ico"
-    },
-    {
-      "src": "/images/(.*)",
-      "dest": "/images/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
-  "builds": [
+  "headers": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript"
+        }
+      ]
     }
   ]
 } 
