@@ -319,7 +319,7 @@ const Home = () => {
                 className="relative rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute -bottom-6 -right-6 bg-white dark:bg-secondary-800 p-4 rounded-lg shadow-lg">
-                <div className="text-4xl font-bold text-primary-500">15+</div>
+                <div className="text-4xl font-bold text-primary-500">3+</div>
                 <div className="text-secondary-600 dark:text-secondary-400">Years of Excellence</div>
               </div>
             </motion.div>
@@ -336,7 +336,7 @@ const Home = () => {
               </div>
 
               <h2 className="text-4xl font-bold text-secondary-900 dark:text-white">
-                Delivering Comfort and Quality Since 2008
+                Delivering Comfort and Quality Since 2021
               </h2>
 
               <p className="text-secondary-600 dark:text-secondary-400 text-lg leading-relaxed">
