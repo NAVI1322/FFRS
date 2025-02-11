@@ -340,7 +340,7 @@ const Home = () => {
               </h2>
 
               <p className="text-secondary-600 dark:text-secondary-400 text-lg leading-relaxed">
-                With over 15 years of experience, we've built our reputation on providing exceptional HVAC services
+                With over 3 years of experience, we've built our reputation on providing exceptional HVAC services
                 that prioritize your comfort and satisfaction. Our team of certified professionals ensures
                 that every project meets the highest standards of quality.
               </p>
